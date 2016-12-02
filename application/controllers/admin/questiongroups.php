@@ -523,9 +523,8 @@ class questiongroups extends Survey_Common_Action
     public function getGroupExplorerDatas($surveyid, $language)
     {
         $iSurveyID = (int) $surveyid;
-        $aGroups   = QuestionGroup::model()->getGroupExplorerDatas($iSurveyID, $language);   // Get an array of Groups and questions
-        $aDatas    = array();                                                               // The indexed array
-
+        $aGroups   = QuestionGroup::model()->getGroupExplorerDatas($iSurveyID, $language);   // Get an array of Groups and questions                                 // The indexed array
+        $jDatas    = array();
         // Two task :
         // Clean the datas (ellipsize etc)
         foreach($aGroups as $aGroup)
