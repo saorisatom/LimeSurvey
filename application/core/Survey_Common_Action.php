@@ -555,6 +555,20 @@ class Survey_Common_Action extends CAction
     function _tokenbar($aData)
     {
         if( isset($aData['token_bar']) ) {
+            $iSurveyID = $aData['surveyid'];
+
+            /**
+             * Here we add a new Event to LimeSurvey : 'sendInvitationMenuTokenRender'
+             * The aim of this event is to handle in other to add Extra Invitation Or Reminder options to the 'Invite & Remind' dropdown list in the token view.
+             * 
+             * @author saori satom <saorisatom@mail.com>
+             */
+            $event = new PluginEvent('sendInvitationMenuTokenRender', $this);
+            $event->set('surveyId', $iSurveyID);
+            App()->getPluginManager()->dispatchEvent($event);
+            
+            $extraInvitationOptions = $event->get('extraInvitationOptions');
+            $aData['extraInvitationOptions'] = $extraInvitationOptions;
 
             if(isset($aData['token_bar']['closebutton']['url']))
             {

@@ -116,6 +116,33 @@
                                 <?php eT("Edit email templates"); ?>
                             </a>
                         </li>
+
+                        <!-- Other Invitation Options -->
+                        <!-- By Adding this few lines of code, we want to give the possibility to add other way of inviting participants of the token.
+                        
+                        We will use the '$extraInvitationOptions' variable, which is an array of 'MenuItems' elements (application\libraries\MenuObjects\MenuItem.php)
+                        -->
+                        <?php if (isset($extraInvitationOptions)): ?>
+                          <?php foreach ($extraInvitationOptions as $invitationOption): ?>
+                              <?php if ($invitationOption->isDivider()): ?>
+                                  <li class="divider"></li>
+                              <?php elseif ($invitationOption->isSmallText()): ?>
+                                  <li class="dropdown-header"><?php echo $invitationOption->getLabel();?></li>
+                              <?php else: ?>
+                                  <li>
+                                      <a href="<?php echo $invitationOption->getHref(); ?>">
+                                          <!-- Spit out icon if present -->
+                                          <?php if ($invitationOption->getIconClass() != ''): ?>
+                                            <span class="<?php echo $invitationOption->getIconClass(); ?>">&nbsp;</span>
+                                          <?php endif; ?>
+                                          <?php echo $invitationOption->getLabel(); ?>
+                                      </a>
+                                  </li>
+                              <?php endif; ?>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                        <!-- End Other Invitation Options -->
+
                         <?php endif; ?>
 
                         <li role="separator" class="divider"></li>
